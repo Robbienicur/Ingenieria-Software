@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'confirmacion_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  int _cantidadBoletos = 0;
+  final int _cantidadBoletos = 0;
   int _boletosComprar = 1;
 
   List<Widget> _buildPages() {
@@ -91,10 +92,14 @@ class _HomeScreenState extends State<HomeScreen> {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                setState(() {
-                  _cantidadBoletos += _boletosComprar;
-                  _boletosComprar = 1;
-                });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConfirmacionScreen(
+                      cantidadBoletos: _boletosComprar,
+                    ),
+                  ),
+                );
               },
               child: const Text('Comprar'),
             ),
